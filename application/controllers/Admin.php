@@ -10,11 +10,24 @@ class Admin extends MY_Controller
 
         if($this->form_validation->run())
         {
-            echo "Validation Success !!";
+            $username = $this->input->post('username');
+            $password = $this->input->post('password');
+
+            $id = $this->loginmodel->isvalidate($username, $password);
+            if($id)
+            {
+                $this->load->library('session');
+                $this->session->set_userdata('id', $id);
+                $this->load->view('admin/dashboard');
+            }
+            else
+            {
+                echo "Username & Password not matched.";
+            }
         }
         else
         {
-            $this->load->view('Users/articlelist');
+            $this->load->view('Admin/login');
         }
     }
 }
