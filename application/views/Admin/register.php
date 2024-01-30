@@ -2,7 +2,7 @@
 
 <div class="container-fluid">
     <div class="row col-sm-12 justify-content-center">
-        <div class="col-sm-6 card my-3 px-4 py-4 ">
+        <div class="col-sm-4 card my-2 px-4 py-3 ">
         <h2 class="text-center">Register Form</h2>
         <?php echo form_open('admin/sendmail'); ?>
             <div class="form-group">
