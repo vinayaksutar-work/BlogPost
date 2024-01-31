@@ -15,14 +15,24 @@ class loginmodel extends CI_Model
             return false;
         }
     }
-    public function articleList()
+    public function articleList($limit,$offset)
     {
         $id = $this->session->userdata('id');
-        $q  = $this->db->select('article_title,user_id')
+        $q  = $this->db->select()
+             ->from('articles')
+             ->where(['user_id' => $id])
+             ->limit($limit, $offset)
+             ->get();
+             return $q->result();
+    }
+    public function num_rows()
+    {
+        $id = $this->session->userdata('id');
+        $q  = $this->db->select()
              ->from('articles')
              ->where(['user_id' => $id])
              ->get();
-             return $q->result();
+             return $q->num_rows();
     }
     public function addArticles()
     {
@@ -32,8 +42,7 @@ class loginmodel extends CI_Model
                         'article_title' => $this->input->post('article_title'),
                         'article_body' => $this->input->post('article_body')
                      );
-        $this->db->insert('articles', $data);
-        return true;
+        return $this->db->insert('articles', $data);
     }
     public function addUser()
     {
@@ -44,8 +53,11 @@ class loginmodel extends CI_Model
                         'lastname' => $this->input->post('lastname'),
                         'email' => $this->input->post('email')
         );
-        $this->db->insert('users', $data);
-        return true;
+        return $this->db->insert('users', $data);
+    }
+    public function del($id)
+    {
+        return $this->db->delete('articles', array('id' => $id));
     }
 }
 ?>

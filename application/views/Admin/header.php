@@ -13,7 +13,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="#">Admin Panel</a>
         <?php  if($this->session->userdata('id')): ?>
-            <li>
+            <li class="list-unstyled">
                 <a href="<?= base_url('admin/logout'); ?>" class="btn btn-danger ">Logout</a>
             </li>
         <?php endif; ?>

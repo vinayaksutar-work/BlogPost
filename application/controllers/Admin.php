@@ -8,15 +8,8 @@ class Admin extends MY_Controller
     //     if($this->session->userdata('id'))
     //     return redirect('admin/welcome');
     // }
-    public function logout()
-    {
-        $this->session->unset_userdata('id');
-        return redirect('admin');
-    }
     public function index()
     {
-        // $this->form_validation->set_rules('username', 'User Name','required|alpha');
-        // $this->form_validation->set_rules('password', 'Password','required|max_length[12]');
         $this->form_validation->set_error_delimiters("<div class='text-danger'>","</div>");
 
         if($this->form_validation->run('admin_login_rules'))
@@ -43,8 +36,24 @@ class Admin extends MY_Controller
     }
     public function welcome()
     {
-        $articles = $this->loginmodel->articleList();
+        $this->load->model('loginmodel');
+        $this->load->library('pagination');
+
+        $config=[
+            'base_url' => base_url('admin/welcome'),
+            'per_page' =>5,
+            'total_rows' =>$this->loginmodel->num_rows()
+        ];
+
+        $this->pagination->initialize($config);
+
+        $articles = $this->loginmodel->articleList($config['per_page'],$this->uri->segment(3));
         $this->load->view('admin/dashboard',['articles' => $articles]);
+    }
+    public function logout()
+    {
+        $this->session->unset_userdata('id');
+        return redirect('admin');
     }
     public function adduser()
     {
@@ -75,9 +84,19 @@ class Admin extends MY_Controller
     {
 
     }
-    public function deleteuser()
+    public function deleteArticle()
     {
-
+        $id=$this->input->post('id');
+            if($this->loginmodel->del($id))
+            {
+                $this->session->set_flashdata('msg', 'Article deleted successfully !!!!');
+                $this->session->set_flashdata('msg_class', 'alert-success');
+            }
+            else{
+                $this->session->set_flashdata('msg', 'Article not deleted, please try again.');
+                $this->session->set_flashdata('msg_class', 'alert-danger');
+            }
+            return redirect('admin/welcome');
     }
     public function register()
     {

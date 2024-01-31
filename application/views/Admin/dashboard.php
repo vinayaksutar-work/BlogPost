@@ -23,7 +23,6 @@
         <table class="table table-light table-bordered text-center">
             <thead>
                 <tr>
-                    <th>User Id</th>
                     <th>Article Title</th>
                     <th>Edit</th>
                     <th>Delete</th> 
@@ -33,10 +32,16 @@
             <?php if(count($articles)): ?>
                 <?php foreach($articles as $art): ?>
                     <tr>
-                        <td><?= $art->user_id; ?></td>
                         <td><?= $art->article_title; ?></td>
                         <td><a href="" class="btn btn-success ">Edit</a></td>
-                        <td><a href="" class="btn btn-danger ">Delete</a></td>
+                        <td>
+                            <?=
+                                form_open('admin/deleteArticle'),
+                                form_hidden('id',$art->id),
+                                form_submit(['class'=>'btn btn-danger','value'=>'Delete','name'=>'submit']),
+                                form_close();
+                            ?>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>
@@ -45,6 +50,7 @@
                 </tr>
             <?php endif; ?>
             </tbody>
+            <?= $this->pagination->create_links(); ?>
         </table>
     </div>
 </div>
