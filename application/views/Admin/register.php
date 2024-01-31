@@ -4,6 +4,20 @@
     <div class="row col-sm-12 justify-content-center">
         <div class="col-sm-4 card my-2 px-4 py-3 ">
         <h2 class="text-center">Register Form</h2>
+
+        <?php 
+            if($msg=$this->session->flashdata('msg')):
+            $msg_class=$this->session->flashdata('msg_class') 
+        ?>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="alert <?= $msg_class ?>">
+                        <?= $msg; ?>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+
         <?php echo form_open('admin/sendmail'); ?>
             <div class="form-group">
                 <label for="">Username:</label>
@@ -33,7 +47,7 @@
                 <label for="">Email:</label>
                 <?php echo form_input(['type'=>'email','class'=>'form-control','placeholder'=>'Enter Your Email',
                 'name'=>'email','value'=>set_value('email')]); ?>
-                <?php echo form_error('email');?>
+                <?php echo form_error('email'); ?>
             </div>
             <?php echo form_submit(['class'=>'btn btn-primary','value'=>'Submit','name'=>'submit']); ?>
             <?php echo form_reset(['class'=>'btn btn-danger','value'=>'Reset','name'=>'reset']); ?>

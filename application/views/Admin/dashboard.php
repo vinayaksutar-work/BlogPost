@@ -2,14 +2,28 @@
 
 <div class="container py-5 ">
     <h1 class="text-center">Dashboard</h1>
-    <div class="row justify-content-end ">
+    <div class="row col-sm-12 justify-content-end my-3">
         <a href="<?= base_url('admin/adduser'); ?>" class="btn btn-primary ">Add Articles</a>
     </div>
-    <div class="table-responsive m-5">
+
+    <?php 
+        if($msg=$this->session->flashdata('msg')):
+        $msg_class=$this->session->flashdata('msg_class') 
+    ?>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="alert <?= $msg_class ?>">
+                    <?= $msg; ?>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <div class="table-responsive">
         <table class="table table-light table-bordered text-center">
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>User Id</th>
                     <th>Article Title</th>
                     <th>Edit</th>
                     <th>Delete</th> 
@@ -19,8 +33,8 @@
             <?php if(count($articles)): ?>
                 <?php foreach($articles as $art): ?>
                     <tr>
-                        <td>1</td>
-                        <td><?php echo $art->article_title; ?></td>
+                        <td><?= $art->user_id; ?></td>
+                        <td><?= $art->article_title; ?></td>
                         <td><a href="" class="btn btn-success ">Edit</a></td>
                         <td><a href="" class="btn btn-danger ">Delete</a></td>
                     </tr>

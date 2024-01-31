@@ -49,20 +49,22 @@ class Admin extends MY_Controller
     public function adduser()
     {
         $this->load->view('admin/addarticle');
-        // $this->input->post();
     }
     public function userValidation()
     {
-        if($this->form_validation->run('add_article_rules') == FALSE)
+        if($this->form_validation->run('add_article_rules'))
         {
             $this->loginmodel->addArticles();
             if($this->form_validation->run('add_article_rules'))
             {
-                echo "Insert article";
+                $this->session->set_flashdata('msg', 'Article added successfully !!!!');
+                $this->session->set_flashdata('msg_class', 'alert-success');
             }
             else{
-                $this->load->view('admin/addarticle');
+                $this->session->set_flashdata('msg', 'Article not added, please try again.');
+                $this->session->set_flashdata('msg_class', 'alert-danger');
             }
+            return redirect('admin/welcome');
         }
         else
         {
@@ -83,29 +85,36 @@ class Admin extends MY_Controller
     }
     public function sendmail()
     {
-        $this->form_validation->set_rules('username', 'UserName','required|alpha');
-        $this->form_validation->set_rules('password', 'Password','required|max_length[12]');
-        $this->form_validation->set_rules('firstname', 'FirstName','required|alpha');
-        $this->form_validation->set_rules('lastname', 'LastName','required|alpha');
-        $this->form_validation->set_rules('email', 'Email','required|valid_email|is_unique[users.email]');
         $this->form_validation->set_error_delimiters("<div class='text-danger'>","</div>");
-
-        if($this->form_validation->run())
+        if($this->form_validation->run('user_register_rules'))
         {
-            $this->email->from(set_value('email'),set_value('firstname'));
-            $this->email->to('vinayaksutar.work@gmail.com');
-            $this->email->subject('Registration Greetings');
-            $this->email->message('Thank you for registering');
-            $this->email->set_newline("\r\n");
-            $this->email->send();
+            // $this->load->library('email');
+            // $this->email->from(set_value('email'),set_value('firstname'));
+            // $this->email->to('vinayaksutar.work@gmail.com');
+            // $this->email->subject('Registration Greetings');
+            // $this->email->message('Thank you for registering');
+            // $this->email->set_newline("\r\n");
+            // $this->email->send();
 
-            if(!$this->email->send())
+            // if(!$this->email->send())
+            // {
+            //     show_error($this->email->print_debugger());
+            // }
+            // else{
+            //     "Your email has been sent successfully";
+            // }
+
+            $this->loginmodel->addUser();
+            if($this->form_validation->run('user_register_rules'))
             {
-                show_error($this->email->print_debugger());
+                $this->session->set_flashdata('msg', 'User added successfully !!!!');
+                $this->session->set_flashdata('msg_class', 'alert-success');
             }
             else{
-                "Your email has been sent successfully";
+                $this->session->set_flashdata('msg', 'User not added, please try again.');
+                $this->session->set_flashdata('msg_class', 'alert-danger');
             }
+            return redirect('admin/register');
         }
         else{
             $this->load->view('admin/register');
