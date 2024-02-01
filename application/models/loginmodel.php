@@ -59,5 +59,17 @@ class loginmodel extends CI_Model
     {
         return $this->db->delete('articles', array('id' => $id));
     }
+    public function edit_article($articleid)
+    {
+       $q = $this->db->select(['article_title','article_body'])
+                 ->where(['id'=> $articleid])
+                 ->get('articles');
+                 return $q->row();
+    }
+    public function update_article($articleid, Array $article)
+    {
+        return $this->db->where('id', $articleid)
+                 ->update('articles', $article);
+    }
 }
 ?>

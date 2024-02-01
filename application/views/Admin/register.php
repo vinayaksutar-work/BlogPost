@@ -2,20 +2,20 @@
 
 <div class="container-fluid">
     <div class="row col-sm-12 justify-content-center">
-        <div class="col-sm-4 card my-2 px-4 py-3 ">
+        <div class="col-sm-8 col-md-6 col-xl-4 card my-2 px-4 py-3 ">
         <h2 class="text-center">Register Form</h2>
 
         <?php 
             if($msg=$this->session->flashdata('msg')):
             $msg_class=$this->session->flashdata('msg_class') 
         ?>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="alert <?= $msg_class ?>">
-                        <?= $msg; ?>
-                    </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="alert <?= $msg_class ?>">
+                    <?= $msg; ?>
                 </div>
             </div>
+        </div>
         <?php endif; ?>
 
         <?php echo form_open('admin/sendmail'); ?>

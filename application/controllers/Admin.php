@@ -36,13 +36,20 @@ class Admin extends MY_Controller
     }
     public function welcome()
     {
-        $this->load->model('loginmodel');
-        $this->load->library('pagination');
-
         $config=[
             'base_url' => base_url('admin/welcome'),
-            'per_page' =>5,
-            'total_rows' =>$this->loginmodel->num_rows()
+            'per_page' =>4,
+            'total_rows' =>$this->loginmodel->num_rows(),
+            'full_tag_open' =>"<ul class='pagination'>",
+            'full_tag_close' =>"</ul>",
+            'next_tag_open' =>"<li>",
+            'next_tag_close' =>"</li>",
+            'prev_tag_open' =>"<li>",
+            'prev_tag_close' =>"</li>",
+            'num_tag_open' =>"<li>",
+            'num_tag_close' =>"</li>",
+            'current_tag_open' =>"<li class='active'><a>",
+            'current_tag_close' =>"</a></li>"
         ];
 
         $this->pagination->initialize($config);
@@ -80,9 +87,20 @@ class Admin extends MY_Controller
             $this->load->view('admin/addarticle');
         }
     }
-    public function edituser()
+    public function editArticle($id)
     {
+        $article = $this->loginmodel->edit_article($id);
+        $this->load->view('admin/editarticle',['article' => $article]);
+    }
+    public function updateArticle()
+    {
+        if($this->loginmodel->update_article())
+        {
 
+        }
+        else{
+            
+        }
     }
     public function deleteArticle()
     {
@@ -123,8 +141,8 @@ class Admin extends MY_Controller
             //     "Your email has been sent successfully";
             // }
 
-            $this->loginmodel->addUser();
-            if($this->form_validation->run('user_register_rules'))
+           
+            if( $this->loginmodel->addUser())
             {
                 $this->session->set_flashdata('msg', 'User added successfully !!!!');
                 $this->session->set_flashdata('msg_class', 'alert-success');

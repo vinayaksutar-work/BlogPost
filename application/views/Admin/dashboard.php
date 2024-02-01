@@ -33,7 +33,13 @@
                 <?php foreach($articles as $art): ?>
                     <tr>
                         <td><?= $art->article_title; ?></td>
-                        <td><a href="" class="btn btn-success ">Edit</a></td>
+                        <td>
+                            <?=
+                                form_open('admin/editArticle/'.$art->id),
+                                form_submit(['class'=>'btn btn-success','value'=>'Edit/Update','name'=>'submit']),
+                                form_close();
+                            ?>
+                        </td>
                         <td>
                             <?=
                                 form_open('admin/deleteArticle'),
@@ -50,8 +56,8 @@
                 </tr>
             <?php endif; ?>
             </tbody>
-            <?= $this->pagination->create_links(); ?>
         </table>
+        <?= $this->pagination->create_links(); ?>
     </div>
 </div>
 
