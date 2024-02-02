@@ -17,7 +17,7 @@ class Admin extends MY_Controller
             $username = $this->input->post('username');
             $password = $this->input->post('password');
 
-            $id = $this->loginmodel->isvalidate($username, $password);
+            $id = $this->loginmodel->is_login($username, $password);
             if($id)
             {
                 $this->session->set_userdata('id', $id);
@@ -54,7 +54,7 @@ class Admin extends MY_Controller
 
         $this->pagination->initialize($config);
 
-        $articles = $this->loginmodel->articleList($config['per_page'],$this->uri->segment(3));
+        $articles = $this->loginmodel->is_articlelist($config['per_page'],$this->uri->segment(3));
         $this->load->view('admin/dashboard',['articles' => $articles]);
     }
     public function logout()
@@ -70,7 +70,7 @@ class Admin extends MY_Controller
     {
         if($this->form_validation->run('add_article_rules'))
         {
-            $this->loginmodel->addArticles();
+            $this->loginmodel->is_addarticles();
             if($this->form_validation->run('add_article_rules'))
             {
                 $this->session->set_flashdata('msg', 'Article added successfully !!!!');
@@ -89,23 +89,37 @@ class Admin extends MY_Controller
     }
     public function editArticle($id)
     {
-        $article = $this->loginmodel->edit_article($id);
+        $article = $this->loginmodel->is_editarticle($id);
         $this->load->view('admin/editarticle',['article' => $article]);
     }
-    public function updateArticle()
+    public function updateArticle($articleid)
     {
-        if($this->loginmodel->update_article())
+        if($this->form_validation->run('add_article_rules'))
         {
-
+            $data = array(
+                            'article_title' => $this->input->post('article_title'),
+                            'article_body' => $this->input->post('article_body')
+                        );
+            if($this->loginmodel->is_updatearticle($articleid,$data))
+            {
+                $this->session->set_flashdata('msg', 'Article Updated successfully !!!!');
+                $this->session->set_flashdata('msg_class', 'alert-success');
+            }
+            else{
+                $this->session->set_flashdata('msg', 'Article not Updated, please try again.');
+                $this->session->set_flashdata('msg_class', 'alert-danger');
+            }
+            return redirect('admin/welcome');
         }
-        else{
-            
+        else
+        {
+            $this->load->view('admin/editarticle');
         }
     }
     public function deleteArticle()
     {
         $id=$this->input->post('id');
-            if($this->loginmodel->del($id))
+            if($this->loginmodel->is_delete($id))
             {
                 $this->session->set_flashdata('msg', 'Article deleted successfully !!!!');
                 $this->session->set_flashdata('msg_class', 'alert-success');
@@ -120,7 +134,7 @@ class Admin extends MY_Controller
     {
         $this->load->view('admin/register');
     }
-    public function sendmail()
+    public function registerUser()
     {
         $this->form_validation->set_error_delimiters("<div class='text-danger'>","</div>");
         if($this->form_validation->run('user_register_rules'))
@@ -142,7 +156,7 @@ class Admin extends MY_Controller
             // }
 
            
-            if( $this->loginmodel->addUser())
+            if( $this->loginmodel->is_adduser())
             {
                 $this->session->set_flashdata('msg', 'User added successfully !!!!');
                 $this->session->set_flashdata('msg_class', 'alert-success');

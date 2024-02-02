@@ -2,7 +2,7 @@
 
 class loginmodel extends CI_Model
 {
-    public function isvalidate($username, $password)
+    public function is_login($username, $password)
     {
         $q = $this->db->where(['username' => $username, 'password' =>$password])
                       ->get('users');
@@ -15,7 +15,7 @@ class loginmodel extends CI_Model
             return false;
         }
     }
-    public function articleList($limit,$offset)
+    public function is_articlelist($limit,$offset)
     {
         $id = $this->session->userdata('id');
         $q  = $this->db->select()
@@ -34,7 +34,7 @@ class loginmodel extends CI_Model
              ->get();
              return $q->num_rows();
     }
-    public function addArticles()
+    public function is_addarticles()
     {
         $id = $this->session->userdata('id');
         $data = array(
@@ -44,7 +44,7 @@ class loginmodel extends CI_Model
                      );
         return $this->db->insert('articles', $data);
     }
-    public function addUser()
+    public function is_adduser()
     {
         $data = array(
                         'username' => $this->input->post('username'),
@@ -55,18 +55,18 @@ class loginmodel extends CI_Model
         );
         return $this->db->insert('users', $data);
     }
-    public function del($id)
+    public function is_delete($id)
     {
         return $this->db->delete('articles', array('id' => $id));
     }
-    public function edit_article($articleid)
+    public function is_editarticle($articleid)
     {
-       $q = $this->db->select(['article_title','article_body'])
+       $q = $this->db->select(['article_title','article_body','id'])
                  ->where(['id'=> $articleid])
                  ->get('articles');
                  return $q->row();
     }
-    public function update_article($articleid, Array $article)
+    public function is_updatearticle($articleid, Array $article)
     {
         return $this->db->where('id', $articleid)
                  ->update('articles', $article);

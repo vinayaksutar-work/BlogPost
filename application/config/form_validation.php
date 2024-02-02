@@ -7,12 +7,12 @@ $config =
         [
             'field'=>'username',
             'label'=>'User Name',
-            'rules'=>'required|alpha'
+            'rules'=>'required'
         ],
         [
             'field'=>'password',
             'label'=>'Password',
-            'rules'=>'required|max_length[12]'
+            'rules'=>'required'
         ]    
     ],
 
@@ -35,7 +35,7 @@ $config =
         [
             'field'=>'username',
             'label'=>'User Name',
-            'rules'=>'required|alpha'
+            'rules'=>'required|is_unique[users.username]'
         ],
         [
             'field'=>'password',

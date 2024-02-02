@@ -18,7 +18,7 @@
         </div>
         <?php endif; ?>
 
-        <?php echo form_open('admin/sendmail'); ?>
+        <?php echo form_open('admin/registerUser'); ?>
             <div class="form-group">
                 <label for="">Username:</label>
                 <?php echo form_input(['class'=>'form-control','placeholder'=>'Enter Your Username',
