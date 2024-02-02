@@ -2,7 +2,7 @@
 
 <div class="container-fluid mt-5 ">
     <div class="row col-sm-12 justify-content-center">
-        <div class="col-sm-8 col-md-6 col-xl-4 card my-5 px-4 py-4 ">
+        <div class="col-sm-6 col-md-6 col-xl-4 card my-5 px-4 py-4 ">
         <h2 class="text-center">Login</h2>
 
         <?php if($error = $this->session->flashdata('Login_failed')): ?>

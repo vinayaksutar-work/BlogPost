@@ -2,7 +2,7 @@
 
 <div class="container-fluid">
     <div class="row col-sm-12 justify-content-center">
-        <div class="col-sm-8 col-md-8 col-xl-6 card my-5 px-4 py-4 ">
+        <div class="col-sm-10 col-md-8 col-lg-6 card my-5 px-4 py-4 ">
         <h2 class="text-center">Add Articles</h2>
         <?php echo form_hidden('user_id','$this->session->userdata("id")'); ?>
         <?php echo form_open('admin/userValidation'); ?>

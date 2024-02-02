@@ -10,7 +10,7 @@
 <title>Article List</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-xxl navbar-dark bg-primary">
         <a class="navbar-brand" href="#">Admin Panel</a>
         <?php  if($this->session->userdata('id')): ?>
             <li class="list-unstyled">

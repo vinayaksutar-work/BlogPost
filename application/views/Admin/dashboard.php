@@ -23,15 +23,17 @@
         <table class="table table-light table-bordered text-center">
             <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Article Title</th>
                     <th>Edit</th>
-                    <th>Delete</th> 
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
             <?php if(count($articles)): ?>
                 <?php foreach($articles as $art): ?>
                     <tr>
+                        <td><?= $art->id;?></td>
                         <td><?= $art->article_title; ?></td>
                         <td>
                             <?=
