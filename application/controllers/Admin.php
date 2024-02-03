@@ -138,24 +138,7 @@ class Admin extends MY_Controller
     {
         $this->form_validation->set_error_delimiters("<div class='text-danger'>","</div>");
         if($this->form_validation->run('user_register_rules'))
-        {
-            // $this->load->library('email');
-            // $this->email->from(set_value('email'),set_value('firstname'));
-            // $this->email->to('vinayaksutar.work@gmail.com');
-            // $this->email->subject('Registration Greetings');
-            // $this->email->message('Thank you for registering');
-            // $this->email->set_newline("\r\n");
-            // $this->email->send();
-
-            // if(!$this->email->send())
-            // {
-            //     show_error($this->email->print_debugger());
-            // }
-            // else{
-            //     "Your email has been sent successfully";
-            // }
-
-           
+        {  
             if( $this->loginmodel->is_adduser())
             {
                 $this->session->set_flashdata('msg', 'User added successfully !!!!');
