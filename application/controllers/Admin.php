@@ -15,7 +15,7 @@ class Admin extends MY_Controller
         if($this->form_validation->run('admin_login_rules'))
         {
             $username = $this->input->post('username');
-            $password = $this->input->post('password');
+            $password = sha1($this->input->post('password'));
 
             $id = $this->loginmodel->is_login($username, $password);
             if($id)

@@ -48,7 +48,7 @@ class loginmodel extends CI_Model
     {
         $data = array(
                         'username' => $this->input->post('username'),
-                        'password' => $this->input->post('password'),
+                        'password' => sha1($this->input->post('password')),
                         'firstname' => $this->input->post('firstname'),
                         'lastname' => $this->input->post('lastname'),
                         'email' => $this->input->post('email')

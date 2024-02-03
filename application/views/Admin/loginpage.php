@@ -28,9 +28,11 @@
                 'name'=>'password','value'=>set_value('password')]); ?>
                 <?php echo form_error('password'); ?>
             </div>
-            <?php echo form_submit(['class'=>'btn btn-primary','value'=>'Submit','name'=>'submit']); ?>
-            <?php echo form_reset(['class'=>'btn btn-danger','value'=>'Reset','name'=>'reset']); ?>
-            <?php echo anchor('admin/register/','Sign Up?', 'class="link-class"') ?>
+            <div class="row d-flex">
+                <?php echo form_submit(['class'=>'btn btn-primary ml-3','value'=>'Submit','name'=>'submit']); ?>
+                <?php echo form_reset(['class'=>'btn btn-danger ml-3','value'=>'Reset','name'=>'reset']); ?>
+                <?php echo anchor('admin/register/','Sign Up?', 'class="link-class ml-auto px-3"') ?>
+            </div>
         </div>
     </div>
 </div>

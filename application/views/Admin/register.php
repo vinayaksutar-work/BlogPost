@@ -49,8 +49,11 @@
                 'name'=>'email','value'=>set_value('email')]); ?>
                 <?php echo form_error('email'); ?>
             </div>
-            <?php echo form_submit(['class'=>'btn btn-primary','value'=>'Submit','name'=>'submit']); ?>
-            <?php echo form_reset(['class'=>'btn btn-danger','value'=>'Reset','name'=>'reset']); ?>
+            <div class="row d-flex">
+                <?php echo form_submit(['class'=>'btn btn-primary ml-3','value'=>'Submit','name'=>'submit']); ?>
+                <?php echo form_reset(['class'=>'btn btn-danger ml-3','value'=>'Reset','name'=>'reset']); ?>
+                <?php echo anchor('admin/','Login Page?', 'class="link-class ml-auto px-3"') ?>
+            </div>
         </div>
     </div>
 </div>
