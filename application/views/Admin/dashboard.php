@@ -25,7 +25,7 @@
                 <tr>
                     <th>Id</th>
                     <th>Article Title</th>
-                    <th>Edit</th>
+                    <th>Update</th>
                     <th>Delete</th>
                 </tr>
             </thead>
@@ -38,7 +38,7 @@
                         <td>
                             <?=
                                 form_open('admin/editArticle/'.$art->id),
-                                form_submit(['class'=>'btn btn-success','value'=>'Edit/Update','name'=>'submit']),
+                                form_submit(['class'=>'btn btn-success','value'=>'Update','name'=>'submit']),
                                 form_close();
                             ?>
                         </td>

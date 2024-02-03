@@ -18,8 +18,11 @@
                 'name'=>'article_body','value'=>set_value('article_body',$article->article_body)]); ?>
                 <?php echo form_error('article_body'); ?>
             </div>
-            <?php echo form_submit(['class'=>'btn btn-success','value'=>'Update','name'=>'submit']); ?>
-            <?php echo form_reset(['class'=>'btn btn-danger','value'=>'Reset','name'=>'reset']); ?>
+            <div class="row d-flex">
+                <?php echo form_submit(['class'=>'btn btn-success ml-3','value'=>'Update','name'=>'submit']); ?>
+                <?php echo form_reset(['class'=>'btn btn-danger ml-3','value'=>'Reset','name'=>'reset']); ?>
+                <?php echo anchor('admin/welcome','<i class="fa fa-arrow-left"></i>', 'class="btn btn-secondary ml-auto mx-3"') ?>
+            </div>
         </div>
     </div>
 </div>

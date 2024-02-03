@@ -3,7 +3,7 @@
 <div class="container-fluid">
     <div class="row col-sm-12 justify-content-center">
         <div class="col-sm-8 col-md-6 col-xl-4 card my-2 px-4 py-3 ">
-        <h2 class="text-center">Register Form</h2>
+        <h2 class="text-center">User Registration</h2>
 
         <?php 
             if($msg=$this->session->flashdata('msg')):
